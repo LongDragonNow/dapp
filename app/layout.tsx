@@ -1,6 +1,11 @@
+import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { headers } from "next/headers";
+import { cookieToInitialState } from "wagmi";
+import { config } from "./config";
 import "./globals.css";
+import { ContextProvider } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +19,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialState = cookieToInitialState(config, headers().get("cookie"));
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={clsx("min-h-screen font-ppNeueMachina", inter.className)}
+        suppressHydrationWarning
+      >
+        <ContextProvider initialState={initialState}>
+          {children}
+        </ContextProvider>
+      </body>
     </html>
   );
 }

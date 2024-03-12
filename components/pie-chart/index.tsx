@@ -1,8 +1,12 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import highcharts3d from "highcharts/highcharts-3d";
+import HighchartsExporting from "highcharts/modules/exporting";
 
-highcharts3d(Highcharts);
+if (typeof Highcharts === "object") {
+  HighchartsExporting(Highcharts);
+  highcharts3d(Highcharts);
+}
 
 export const PieChart = () => {
   const pieChartOptions = {

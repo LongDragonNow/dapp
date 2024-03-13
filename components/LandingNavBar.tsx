@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import {
+  Button,
   Image,
   Link,
   Navbar,
@@ -13,7 +14,6 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import React from "react";
-import WalletButton from "./wallet-button";
 
 export default function LandingNavigationBar({
   className,
@@ -86,7 +86,9 @@ export default function LandingNavigationBar({
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <WalletButton />
+          <Button size="lg" color="primary" variant="ghost">
+            Enter Dapp
+          </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

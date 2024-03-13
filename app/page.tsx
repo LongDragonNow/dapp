@@ -160,7 +160,7 @@ export default function Home() {
               </span>
             </div>
 
-            <div className="justify-self-end">
+            <div className="justify-self-end md:order-last">
               <Image
                 src="/scroll.png"
                 alt="Long Dragon Scroll"

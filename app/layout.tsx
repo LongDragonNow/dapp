@@ -28,7 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
-        <link rel="preload" href="/hero.png" as="image" />
+        <link
+          rel="preload"
+          fetchPriority="high"
+          as="image"
+          href="/hero.png"
+          type="image/webp"
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

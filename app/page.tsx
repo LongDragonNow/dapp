@@ -6,7 +6,8 @@ import { EvervaultCard } from "@/components/evervault-card";
 import { PieChart } from "@/components/pie-chart";
 import { TextGenerateEffect } from "@/components/text-generate-effect";
 import { TracingBeam } from "@/components/tracing-beam";
-import { Button, Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Button, Card, CardBody, CardFooter } from "@nextui-org/react";
+import Image from "next/image";
 import { toast } from "sonner";
 
 export default function Home() {
@@ -36,10 +37,17 @@ export default function Home() {
         className="absolute h-screen w-full bg-cover bg-no-repeat bg-center"
         style={{
           backgroundImage:
-            "linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%), url('/hero.png')",
+            "linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%)",
         }}
         suppressHydrationWarning
-      ></div>
+      >
+        <Image
+          layout="fill"
+          className="object-center object-cover pointer-events-none"
+          src="/hero.png"
+          alt="Long Dragon"
+        />
+      </div>
 
       <video
         className="w-full h-screen absolute top-0 left-0 mix-blend-color-dodge object-fill"

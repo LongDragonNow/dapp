@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import {
   Image,
   Link,
@@ -13,27 +14,26 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 
-export default function NavigationBar() {
+export default function NavigationBar({ className }: { className?: string }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
-    {
-      name: "Homepage",
-      href: "/",
-    },
-    {
-      name: "DApp",
-      href: "/dapp",
-    },
-  ];
+  const menuItems: {
+    name: string;
+    href: string;
+  }[] = [];
 
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       position="sticky"
+      className={cn(
+        "md:border-2 md:rounded-3xl border-gold bg-black bg-opacity-70 md:h-[100px]",
+        className
+      )}
       classNames={{
         item: ["data-[active=true]:bg-secondary"],
       }}
+      maxWidth="full"
     >
       <NavbarContent>
         <NavbarMenuToggle

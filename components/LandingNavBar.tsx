@@ -90,7 +90,7 @@ export default function LandingNavigationBar({
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="hidden lg:block">
           <Button
             isIconOnly
             size="lg"
@@ -110,7 +110,7 @@ export default function LandingNavigationBar({
           </Button>
         </NavbarItem>
 
-        <NavbarItem>
+        <NavbarItem className="hidden lg:block">
           <Button
             isIconOnly
             size="lg"
@@ -154,7 +154,7 @@ export default function LandingNavigationBar({
             </DropdownMenu>
           </Dropdown>
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem className="md:hidden lg:block">
           <Button
             size="lg"
             color="primary"

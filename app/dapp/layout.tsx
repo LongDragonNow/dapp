@@ -7,7 +7,7 @@ export default function DAppLayout({
 }) {
   return (
     <section>
-      <NavigationBar />
+      <NavigationBar className="container mt-4" />
       {children}
     </section>
   );

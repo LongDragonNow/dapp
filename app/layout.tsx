@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
+        <link rel="preload" href="/hero.png" as="image" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

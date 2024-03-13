@@ -42,7 +42,7 @@ export default function Home() {
         suppressHydrationWarning
       >
         <Image
-          layout="fill"
+          fill
           className="object-center object-cover pointer-events-none"
           src="/hero.png"
           alt="Long Dragon"

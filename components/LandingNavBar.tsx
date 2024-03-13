@@ -67,7 +67,7 @@ export default function LandingNavigationBar({
         />
         <NavbarBrand>
           <Image
-            src="/long-logo.png"
+            src="/long-logo.webp"
             alt="Long Dragon"
             width={100}
             height={100}

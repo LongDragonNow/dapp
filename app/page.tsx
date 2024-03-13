@@ -69,11 +69,9 @@ export default function Home() {
         <source src="/fog.mp4" type="video/mp4" />
       </video>
 
-      <section className="container z-10 h-screen flex flex-col justify-center items-center md:items-start gap-3 shadow-md">
-        <p className="text-5xl mb-4 text-center md:text-start text-shadow-lg shadow-black">
-          Shape Destiny
-        </p>
-        <p className="text-2xl text-shadow-lg shadow-black">In service of</p>
+      <section className="container z-10 h-screen flex flex-col justify-center items-center md:items-start gap-3">
+        <p className="text-5xl mb-4 text-center md:text-start">Shape Destiny</p>
+        <p className="text-2x">In service of</p>
         <Image
           src="/render-text.webp"
           alt="Render network"
@@ -126,7 +124,7 @@ export default function Home() {
                 <EvervaultCard
                   className="h-[350px]"
                   text="Launchpad"
-                  imageUrl="/dragon1.png"
+                  imageUrl="/dragon1.webp"
                 />
               </CardBody>
               <CardFooter className="p-8 leading-7 text-center md:text-start">
@@ -143,7 +141,7 @@ export default function Home() {
                 <EvervaultCard
                   className="h-[350px]"
                   text="Staking"
-                  imageUrl="/dragon2.png"
+                  imageUrl="/dragon2.webp"
                 />
               </CardBody>
               <CardFooter className="p-8 leading-7 text-center md:text-start">
@@ -161,7 +159,7 @@ export default function Home() {
                 <EvervaultCard
                   className="h-[350px]"
                   text="DeGen Box"
-                  imageUrl="/dragon3.png"
+                  imageUrl="/dragon3.webp"
                 />
               </CardBody>
               <CardFooter className="p-8 text-center md:text-start">

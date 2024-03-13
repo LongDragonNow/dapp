@@ -12,24 +12,18 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import React from "react";
-import { ModeToggle } from "./mode-toggle";
-import WalletButton from "./wallet-button";
 
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
     {
-      name: "Presale",
-      href: "/buy",
+      name: "Homepage",
+      href: "/",
     },
     {
       name: "DApp",
       href: "/dapp",
-    },
-    {
-      name: "About",
-      href: "/",
     },
   ];
 
@@ -48,12 +42,12 @@ export default function NavigationBar() {
         />
         <NavbarBrand>
           <Image
-            src="/long-logo.png"
+            src="/long-logo.webp"
             alt="Long Dragon"
-            width={40}
-            height={40}
+            width={100}
+            height={100}
           />
-          <p className="ml-4 font-bold text-inherit">Long</p>
+          <p className="font-thin text-inherit text-2xl">Long</p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -68,23 +62,14 @@ export default function NavigationBar() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <WalletButton />
-        </NavbarItem>
-        <NavbarItem>
-          <ModeToggle />
+          <w3m-button />
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
+              color={"primary"}
               className="w-full"
               href={item.href}
               size="lg"

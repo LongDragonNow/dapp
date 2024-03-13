@@ -3,6 +3,10 @@
 import { cn } from "@/lib/utils";
 import {
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Image,
   Link,
   Navbar,
@@ -126,9 +130,29 @@ export default function LandingNavigationBar({
         </NavbarItem>
 
         <NavbarItem>
-          <Button size="lg" color="primary" variant="flat">
-            Litepaper
-          </Button>
+          <Dropdown>
+            <DropdownTrigger>
+              <Button size="lg" color="primary" variant="flat">
+                Litepaper
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Link Actions">
+              <DropdownItem
+                key="english"
+                href="/litepaper/English.pdf"
+                target="_blank"
+              >
+                English
+              </DropdownItem>
+              <DropdownItem
+                key="mandarin"
+                href="/litepaper/Mandarin.pdf"
+                target="_blank"
+              >
+                Mandarin
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
         <NavbarItem>
           <Button

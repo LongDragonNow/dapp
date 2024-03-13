@@ -4,6 +4,7 @@ import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
+import { Toaster } from "sonner";
 import { cookieToInitialState } from "wagmi";
 import { config } from "./config";
 import "./globals.css";
@@ -34,6 +35,7 @@ export default function RootLayout({
         </ContextProvider>
         <Analytics />
         <SpeedInsights />
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );

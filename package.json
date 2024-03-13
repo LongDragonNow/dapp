@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.2.10",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@tanstack/react-query": "^5.25.0",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
@@ -27,6 +28,7 @@
     "react-dom": "^18",
     "react-element-to-jsx-string": "^15.0.0",
     "react-google-charts": "^4.0.1",
+    "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "viem": "^2.7.22",

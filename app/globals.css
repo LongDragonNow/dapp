@@ -78,6 +78,7 @@
   * {
     @apply font-ppNeueMachina;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
   body {
     @apply font-ppNeueMachina;

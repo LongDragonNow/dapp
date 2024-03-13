@@ -7,6 +7,7 @@ import { PieChart } from "@/components/pie-chart";
 import { TextGenerateEffect } from "@/components/text-generate-effect";
 import { TracingBeam } from "@/components/tracing-beam";
 import { Button, Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { toast } from "sonner";
 
 export default function Home() {
   const projects = [
@@ -29,6 +30,8 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center">
+      <LandingNavigationBar className="md:sticky md:container md:top-4 md:z-5" />
+
       <div
         className="absolute h-screen w-full bg-cover bg-no-repeat bg-center"
         style={{
@@ -38,26 +41,72 @@ export default function Home() {
         suppressHydrationWarning
       ></div>
 
-      <LandingNavigationBar className="md:sticky md:container md:top-4 md:z-50" />
+      <video
+        className="w-full h-screen absolute top-0 left-0 mix-blend-color-dodge object-fill"
+        autoPlay
+        muted
+        playsInline
+        loop
+      >
+        <source src="/dust.mp4" type="video/mp4" />
+      </video>
 
-      <section className="container z-10 h-screen flex flex-col justify-center items-start gap-3">
-        <p className="text-5xl mb-4">Shape Destiny</p>
-        <p className="text-2xl">In service of</p>
+      <video
+        className="w-full h-screen absolute bottom-0 left-0 mix-blend-color-dodge object-fill"
+        autoPlay
+        muted
+        playsInline
+        loop
+      >
+        <source src="/fog.mp4" type="video/mp4" />
+      </video>
+
+      <section className="container z-10 h-screen flex flex-col justify-center items-center md:items-start gap-3 shadow-md">
+        <p className="text-5xl mb-4 text-center md:text-start text-shadow-lg shadow-black">
+          Shape Destiny
+        </p>
+        <p className="text-2xl text-shadow-lg shadow-black">In service of</p>
         <Image src="/render-text.webp" alt="Render network" width={300} />
 
         <Button
+          onPress={() => {
+            toast.custom((t) => (
+              <div className="p-4 bg-black border-3 border-gold text-white flex flex-col justify-center items-center rounded-xl">
+                <div className="text-lg font-bold text-center">
+                  Coming soon!
+                </div>
+                <div className="text-center">
+                  <p>
+                    The Long Dragon Dapp is currently under development and will
+                    be available soon. Please check back later.
+                  </p>
+                </div>
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    toast.dismiss(t);
+                  }}
+                  size="lg"
+                  className="mt-4"
+                >
+                  Close
+                </Button>
+              </div>
+            ));
+          }}
           size="lg"
-          className="mt-4 relative inline-flex h-10 overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+          className="mt-4 relative inline-flex overflow-hidden rounded-xl w-[200px] h-[60px] p-[1px]"
         >
           <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#b8a159_0%,#f5d778_50%,#fcf4d9_100%)]" />
-          <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-xl bg-black px-3 text-sm font-medium text-white backdrop-blur-3xl">
+          <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-xl bg-black px-3 text-xl font-medium text-white backdrop-blur-3xl">
             Enter Dapp
           </span>
         </Button>
       </section>
 
       <TracingBeam className="w-full">
-        <section className="md:h-screen w-full container">
+        <section id="features" className="md:h-screen w-full container">
           <div className="h-full place-content-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="h-auto">
               <CardBody>
@@ -67,7 +116,7 @@ export default function Home() {
                   imageUrl="/dragon1.png"
                 />
               </CardBody>
-              <CardFooter className="p-8 leading-7">
+              <CardFooter className="p-8 leading-7 text-center md:text-start">
                 The Long Dragon Launchpad simplifies the process of
                 participating in emerging Web 3.0 projects. By rigorously
                 vetting projects and purchasing a portion of their funding
@@ -84,7 +133,7 @@ export default function Home() {
                   imageUrl="/dragon2.png"
                 />
               </CardBody>
-              <CardFooter className="p-8 leading-7">
+              <CardFooter className="p-8 leading-7 text-center md:text-start">
                 Long Dragon&apos;s staking platform offers multiple reward
                 streams beyond traditional token tax redistribution. Stakers can
                 earn through liquidity pool creation, airdrop farming, native
@@ -102,7 +151,7 @@ export default function Home() {
                   imageUrl="/dragon3.png"
                 />
               </CardBody>
-              <CardFooter className="p-8">
+              <CardFooter className="p-8 text-center md:text-start">
                 The DeGen Box is an innovative feature within the Long Dragon
                 ecosystem designed to offer unique and potentially high-reward
                 opportunities. It leverages the collective expertise of the Long
@@ -113,8 +162,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="md:h-screen mt-10 md:mt-0 w-full container ">
-          <div className="h-full place-content-center grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section id="introduction" className="mt-10 w-full container ">
+          <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
             <Image
               src="/scroll.png"
               alt="Long Dragon Scroll"
@@ -123,8 +172,11 @@ export default function Home() {
             />
 
             <div className="flex flex-col justify-start">
-              <TextGenerateEffect words={"Introducing Long Dragon ($LD)"} />
-              <span className="mt-4 text-md leading-7">
+              <TextGenerateEffect
+                className="text-center md:text-start"
+                words={"Introducing Long Dragon ($LD)"}
+              />
+              <span className="mt-4 text-md leading-7 text-center md:text-start">
                 The Long Dragon project has been created to address several
                 challenges prevalent in current DeFi ecosystems, including but
                 not limited to the lack of comprehensive staking platforms with
@@ -141,11 +193,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="md:h-screen mt-10 md:mt-0 w-full container">
-          <div className="h-full place-content-center grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section id="more" className="mt-20 w-full container">
+          <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
             <div className="flex flex-col justify-start order-last md:order-1">
-              <TextGenerateEffect words={"Introducing Long Dragon ($LD)"} />
-              <span className="mt-4 text-md leading-7">
+              <TextGenerateEffect
+                className="text-center md:text-start"
+                words={"Introducing Long Dragon ($LD)"}
+              />
+              <span className="mt-4 text-md leading-7 text-center md:text-start">
                 The Long Dragon project has been created to address several
                 challenges prevalent in current DeFi ecosystems, including but
                 not limited to the lack of comprehensive staking platforms with
@@ -162,8 +217,8 @@ export default function Home() {
 
             <div className="justify-self-end md:order-last">
               <Image
-                src="/scroll.png"
-                alt="Long Dragon Scroll"
+                src="/vase.png"
+                alt="Long Dragon Vase"
                 width={400}
                 height={300}
               />
@@ -171,11 +226,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-full container mb-4">
+        <section id="roadmap" className="mt-10 w-full container mb-4">
           <HoverEffect items={projects} />
         </section>
 
-        <section className="mt-10 w-full container ">
+        <section id="tokenomics" className="mt-10 w-full container ">
           <PieChart />
         </section>
 

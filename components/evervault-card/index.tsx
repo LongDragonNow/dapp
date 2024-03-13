@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Image } from "@nextui-org/react";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import Image from "next/image";
 
 export const EvervaultCard = ({
   text,
@@ -59,12 +59,13 @@ export function CardPattern({ mouseX, mouseY, imageUrl }: any) {
         className="absolute inset-0 rounded-2xl opacity-80 mix-blend-overlay  group-hover/card:opacity-100"
         style={style}
       >
-        <div className="absoulte inset-x-0 h-full transition duration-500">
+        <div className="absoulte inset-x-0 h-[350px] transition duration-500">
           <Image
             src={imageUrl || "/long-logo.png"}
             alt="Long Dragon"
-            className="h-full w-full"
+            className="h-[350px] w-full object-center object-cover pointer-events-none"
             loading="lazy"
+            fill
           />
         </div>
       </motion.div>

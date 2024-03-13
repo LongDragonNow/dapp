@@ -1,3 +1,4 @@
+import LandingFooter from "@/components/LandingFooter";
 import LandingNavigationBar from "@/components/LandingNavBar";
 import { HoverEffect } from "@/components/card-hover-effect";
 import { EvervaultCard } from "@/components/evervault-card";
@@ -5,7 +6,7 @@ import { GradientButton } from "@/components/gradient-button";
 import { PieChart } from "@/components/pie-chart";
 import { TextGenerateEffect } from "@/components/text-generate-effect";
 import { TracingBeam } from "@/components/tracing-beam";
-import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 import Image from "next/image";
 
 export default function Home() {
@@ -90,14 +91,14 @@ export default function Home() {
                   text="Launchpad"
                   imageUrl="/dragon1.webp"
                 />
+                <p className="p-8 leading-7 text-center md:text-start">
+                  The Long Dragon Launchpad simplifies the process of
+                  participating in emerging Web 3.0 projects. By rigorously
+                  vetting projects and purchasing a portion of their funding
+                  round, it provides potential for high returns. The platform is
+                  user-friendly, attracting both Web 2.0 and Web 3.0 investors
+                </p>
               </CardBody>
-              <CardFooter className="p-8 leading-7 text-center md:text-start">
-                The Long Dragon Launchpad simplifies the process of
-                participating in emerging Web 3.0 projects. By rigorously
-                vetting projects and purchasing a portion of their funding
-                round, it provides potential for high returns. The platform is
-                user-friendly, attracting both Web 2.0 and Web 3.0 investors
-              </CardFooter>
             </Card>
 
             <Card>
@@ -107,32 +108,32 @@ export default function Home() {
                   text="Staking"
                   imageUrl="/dragon2.webp"
                 />
+                <p className="p-8 leading-7 text-center md:text-start">
+                  Long Dragon&apos;s staking platform offers multiple reward
+                  streams beyond traditional token tax redistribution. Stakers
+                  can earn through liquidity pool creation, airdrop farming,
+                  native token incentives, and DAO-backed investments. The
+                  platform provides enhanced benefits for stakers and
+                  contributes to ecosystem growth
+                </p>
               </CardBody>
-              <CardFooter className="p-8 leading-7 text-center md:text-start">
-                Long Dragon&apos;s staking platform offers multiple reward
-                streams beyond traditional token tax redistribution. Stakers can
-                earn through liquidity pool creation, airdrop farming, native
-                token incentives, and DAO-backed investments. The platform
-                provides enhanced benefits for stakers and contributes to
-                ecosystem growth.
-              </CardFooter>
             </Card>
 
             <Card>
               <CardBody>
                 <EvervaultCard
                   className="h-[350px]"
-                  text="DeGen Box"
+                  text="DeGen Chest"
                   imageUrl="/dragon3.webp"
                 />
+                <p className="p-8 text-center md:text-start">
+                  The DeGen Chest is an innovative feature within the Long
+                  Dragon ecosystem designed to offer unique and potentially
+                  high-reward opportunities. It leverages the collective
+                  expertise of the Long Dragon DAO to identify and capitalize on
+                  emerging trends and projects in the Crypto space
+                </p>
               </CardBody>
-              <CardFooter className="p-8 text-center md:text-start">
-                The DeGen Box is an innovative feature within the Long Dragon
-                ecosystem designed to offer unique and potentially high-reward
-                opportunities. It leverages the collective expertise of the Long
-                Dragon DAO to identify and capitalize on emerging trends and
-                projects in the Crypto space
-              </CardFooter>
             </Card>
           </div>
         </section>
@@ -145,6 +146,7 @@ export default function Home() {
               width={400}
               height={300}
               loading="lazy"
+              className="justify-self-center"
             />
 
             <div className="flex flex-col justify-start">
@@ -191,15 +193,14 @@ export default function Home() {
               </span>
             </div>
 
-            <div className="justify-self-end md:order-last">
-              <Image
-                src="/vase.png"
-                alt="Long Dragon Vase"
-                width={400}
-                height={300}
-                loading="lazy"
-              />
-            </div>
+            <Image
+              src="/vase.png"
+              alt="Long Dragon Vase"
+              width={400}
+              height={300}
+              loading="lazy"
+              className="justify-self-center md:order-last"
+            />
           </div>
         </section>
 
@@ -211,15 +212,26 @@ export default function Home() {
           <PieChart />
         </section>
 
-        <section className="md:h-screen mt-10 md:mt-0 w-full container flex flex-col items-center justify-center">
+        <section className="h-screen mt-10 w-full container flex flex-col items-center justify-center">
           <TextGenerateEffect
-            className="text-center leading-7"
+            className="text-center leading-7 z-50"
             words={
               "We invite community members to support the Long Dragon Project for its potential to offer expansive staking rewards, multiple protocols with easily accessible utility and introduce new projects enabling exclusive access"
             }
           />
+
+          <div className="absolute h-screen w-full bg-cover bg-no-repeat bg-center">
+            <Image
+              fill
+              className="object-center object-cover pointer-events-none"
+              src="/bottom-dragon.png"
+              alt="Long Dragon"
+            />
+          </div>
         </section>
       </TracingBeam>
+
+      <LandingFooter />
     </main>
   );
 }

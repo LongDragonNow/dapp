@@ -64,6 +64,7 @@ export function CardPattern({ mouseX, mouseY, imageUrl }: any) {
             src={imageUrl || "/long-logo.png"}
             alt="Long Dragon"
             className="h-full w-full"
+            loading="lazy"
           />
         </div>
       </motion.div>

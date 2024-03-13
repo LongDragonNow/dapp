@@ -66,7 +66,12 @@ export default function Home() {
           Shape Destiny
         </p>
         <p className="text-2xl text-shadow-lg shadow-black">In service of</p>
-        <Image src="/render-text.webp" alt="Render network" width={300} />
+        <Image
+          src="/render-text.webp"
+          alt="Render network"
+          width={300}
+          height={150}
+        />
 
         <Button
           onPress={() => {
@@ -169,6 +174,7 @@ export default function Home() {
               alt="Long Dragon Scroll"
               width={400}
               height={300}
+              loading="lazy"
             />
 
             <div className="flex flex-col justify-start">
@@ -221,6 +227,7 @@ export default function Home() {
                 alt="Long Dragon Vase"
                 width={400}
                 height={300}
+                loading="lazy"
               />
             </div>
           </div>

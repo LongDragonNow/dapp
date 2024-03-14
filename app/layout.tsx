@@ -33,7 +33,13 @@ export default function RootLayout({
           fetchPriority="high"
           as="image"
           href="/hero.png"
-          type="image/webp"
+          type="image/png"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/bottom-dragon.png"
+          type="image/png"
         />
         <link
           rel="apple-touch-icon"

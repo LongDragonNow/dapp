@@ -82,16 +82,16 @@ export default function RootLayout({
           content="https://longdragon.vercel.app/hero.png"
         />
 
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="longdragon.vercel.app" />
         <meta property="twitter:url" content="https://longdragon.vercel.app" />
-        <meta name="twitter:title" content="Long Dragon" />
+        <meta property="twitter:title" content="Long Dragon" />
         <meta
-          name="twitter:description"
+          property="twitter:description"
           content="The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems"
         />
         <meta
-          name="twitter:image"
+          property="twitter:image"
           content="https://longdragon.vercel.app/hero.png"
         />
       </Head>

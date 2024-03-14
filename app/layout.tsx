@@ -3,7 +3,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Head from "next/head";
 import { headers } from "next/headers";
 import { Toaster } from "sonner";
 import { cookieToInitialState } from "wagmi";
@@ -17,6 +16,53 @@ export const metadata: Metadata = {
   title: "Long Dragon",
   description:
     "The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems",
+  metadataBase: new URL("https://longdragon.vercel.app"),
+  openGraph: {
+    title: "Long Dragon",
+    description:
+      "The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems",
+    url: "https://longdragon.vercel.app/",
+    siteName: "Long Dragon",
+    images: [
+      {
+        url: "https://longdragon.vercel.app/hero.png",
+        width: 800,
+        height: 600,
+      },
+      {
+        url: "https://longdragon.vercel.app/hero.png",
+        width: 1800,
+        height: 1600,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Long Dragon",
+    description:
+      "The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems",
+    creator: "@LongDragonLD",
+    images: ["https://longdragon.vercel.app/hero.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    other: {
+      rel: "apple-touch-icon-precomposed",
+      url: "/apple-touch-icon-precomposed.png",
+    },
+  },
+  manifest: "./site.webmanifest",
+};
+
+export const viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
@@ -28,73 +74,6 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <link
-          rel="preload"
-          fetchPriority="high"
-          as="image"
-          href="/hero.png"
-          type="image/png"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/bottom-dragon.png"
-          type="image/png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="./apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="./favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="./favicon-16x16.png"
-        />
-        <link rel="manifest" href="./site.webmanifest" />
-        <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="theme-color" content="#000000"></meta>
-
-        <title>Long Dragon</title>
-        <meta
-          name="description"
-          content="The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems"
-        />
-
-        <meta property="og:url" content="https://longdragon.vercel.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Long Dragon" />
-        <meta
-          property="og:description"
-          content="The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems"
-        />
-        <meta
-          property="og:image"
-          content="https://longdragon.vercel.app/hero.png"
-        />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="longdragon.vercel.app" />
-        <meta property="twitter:url" content="https://longdragon.vercel.app" />
-        <meta property="twitter:title" content="Long Dragon" />
-        <meta
-          property="twitter:description"
-          content="The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems"
-        />
-        <meta
-          property="twitter:image"
-          content="https://longdragon.vercel.app/hero.png"
-        />
-      </Head>
       <body
         className={clsx("min-h-screen font-ppNeueMachina", inter.className)}
         suppressHydrationWarning

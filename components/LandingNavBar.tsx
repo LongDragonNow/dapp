@@ -97,6 +97,9 @@ export default function LandingNavigationBar({
             color="primary"
             className="text-white"
             variant="light"
+            as={Link}
+            href="https://twitter.com/LongDragonLD"
+            target="_blank"
           >
             <svg
               className="w-6 h-6"
@@ -117,6 +120,9 @@ export default function LandingNavigationBar({
             color="primary"
             className="text-white"
             variant="light"
+            as={Link}
+            href="https://twitter.com/LongDragonLD"
+            target="_blank"
           >
             <svg
               className="w-6 h-6"

@@ -1,17 +1,15 @@
 "use client";
 
-import Link from "next/link";
-
 export default function LandingFooter({ className }: { className?: string }) {
   return (
     <footer className="container px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
       <nav className="flex flex-wrap justify-center -mx-5 -my-2">
-        <div className="px-5 py-2">
+        {/* <div className="px-5 py-2">
           <Link href="#">Terms and Conditions</Link>
         </div>
         <div className="px-5 py-2">
           <Link href="#">Privacy Policy</Link>
-        </div>
+        </div> */}
       </nav>
       <div className="flex justify-center mt-8 space-x-6">
         <a
@@ -46,7 +44,7 @@ export default function LandingFooter({ className }: { className?: string }) {
           </svg>
         </a>
         <a
-          href="https://twitter.com/LongDragonLD"
+          href="https://github.com/LongDragonLD"
           target="_blank"
           className="text-white "
         >

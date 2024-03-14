@@ -37,8 +37,8 @@ export default function LandingNavigationBar({
       href: "#introduction",
     },
     {
-      name: "More",
-      href: "#more",
+      name: "Buy",
+      href: "#buy",
     },
     {
       name: "Roadmap",

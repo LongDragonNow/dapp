@@ -7,6 +7,10 @@ export function PreloadResources() {
     fetchPriority: "high",
     as: "image",
   });
+  ReactDOM.preload("./hero-mobile.png", {
+    fetchPriority: "high",
+    as: "image",
+  });
   ReactDOM.preload("/bottom-dragon.png", {
     fetchPriority: "auto",
     as: "image",

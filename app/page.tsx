@@ -42,8 +42,14 @@ export default function Home() {
       >
         <Image
           fill
-          className="object-center object-cover pointer-events-none"
+          className="hidden md:block object-center object-cover pointer-events-none"
           src="/hero.png"
+          alt="Long Dragon"
+        />
+        <Image
+          fill
+          className="md:hidden object-center object-cover pointer-events-none"
+          src="/hero-mobile.png"
           alt="Long Dragon"
         />
       </div>
@@ -171,25 +177,23 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="more" className="mt-20 w-full container">
+        <section id="buy" className="mt-20 w-full container">
           <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
             <div className="flex flex-col justify-start order-last md:order-1">
               <TextGenerateEffect
                 className="text-center md:text-start"
-                words={"Introducing Long Dragon ($LD)"}
+                words={"Buy Long Dragon ($LD)"}
               />
               <span className="mt-4 text-md leading-7 text-center md:text-start">
-                The Long Dragon project has been created to address several
-                challenges prevalent in current DeFi ecosystems, including but
-                not limited to the lack of comprehensive staking platforms with
-                multiple reward streams, farming protocols that inadequately
-                reward up and coming projects, ineffective decentralized venture
-                capital (VC) fund structures, non-user-friendly launchpads for
-                Web 2.0 investors and the absence of the availability of
-                interpreted blockchain data. Our overarching aim is to merge the
-                user benefits and accessibility of Web 2.0 with the
-                decentralization and advanced technology of Web 3.0 by
-                addressing the aforementioned problems.
+                Long Dragon ($LD) is a native token that serves as the
+                foundational asset for the Long Dragon ecosystem. It is designed
+                to offer a wide range of utilities, including but not limited to
+                staking, farming, governance, and investment opportunities. The
+                token is available for purchase on various decentralized
+                exchanges (DEXs) and can be used to access the full range of
+                Long Dragon ecosystem features. The token is also used to
+                incentivize and reward users for their participation in the
+                ecosystem.
               </span>
             </div>
 

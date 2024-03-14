@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Long Dragon",
     description:
       "The Long Dragon project has been created to address several challenges prevalent in current DeFi ecosystems",
-    url: "https://longdragon.vercel.app/",
+    url: "https://longdragon.ai/",
     siteName: "Long Dragon",
     images: [
       {

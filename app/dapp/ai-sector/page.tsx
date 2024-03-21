@@ -3,9 +3,9 @@
 import { PieChart } from "@/components/pie-chart";
 import supabase from "@/lib/supabase";
 import {
+  Avatar,
   Card,
   CardHeader,
-  Image,
   Table,
   TableBody,
   TableCell,
@@ -19,14 +19,16 @@ import { useEffect, useState } from "react";
 
 const TokenTable = ({ tokens, title }: { tokens: any; title?: string }) => {
   return (
-    <div className="p-1 border-2 border-gold rounded-xl">
+    <div className="p-1 border-2 border-gold rounded-xl overflow-x-scroll">
       {title && <p className="p-4 text-2xl">{title}</p>}
       <Table removeWrapper>
         <TableHeader>
-          <TableColumn className="text-lg">Token</TableColumn>
-          <TableColumn className="text-lg">Price</TableColumn>
-          <TableColumn className="text-lg">1D</TableColumn>
-          <TableColumn className="text-lg">Market Cap</TableColumn>
+          <TableColumn className="text-medium md:text-lg">Token</TableColumn>
+          <TableColumn className="text-medium md:text-lg">Price</TableColumn>
+          <TableColumn className="text-medium md:text-lg">1D</TableColumn>
+          <TableColumn className="text-medium md:text-lg">
+            Market Cap
+          </TableColumn>
         </TableHeader>
         <TableBody>
           {tokens.map((token: any) => (
@@ -34,12 +36,13 @@ const TokenTable = ({ tokens, title }: { tokens: any; title?: string }) => {
               key={token.id}
               className=" last:border-0 border-b-[0.2px] border-y-gray-500 h-10"
             >
-              <TableCell className="text-lg">
-                <div className="flex items-center space-x-3">
-                  <Image
+              <TableCell className="text-medium md:text-lg">
+                <div className="flex flex-row items-center justify-start gap-2">
+                  <Avatar
+                    size="md"
+                    className="min-w-[40px] min-h-[40px]"
                     src={token.logo}
                     alt={token.name}
-                    className="rounded-full w-10 h-10"
                   />
                   <span>
                     {token.name}
@@ -48,19 +51,21 @@ const TokenTable = ({ tokens, title }: { tokens: any; title?: string }) => {
                 </div>
               </TableCell>
               <TableCell>
-                <span className="text-lg">${token.price.toLocaleString()}</span>
+                <span className="text-medium md:text-lg">
+                  ${token.price.toLocaleString()}
+                </span>
               </TableCell>
               <TableCell
                 className={clsx(
                   token.change1d >= 0 ? "text-green-600" : "text-red-600"
                 )}
               >
-                <span className="text-lg">
+                <span className="text-medium md:text-lg">
                   {Number(token.change1d).toFixed(2)}%
                 </span>
               </TableCell>
               <TableCell>
-                <span className="text-lg">
+                <span className="text-medium md:text-lg">
                   ${token.marketCap.toLocaleString()}
                 </span>
               </TableCell>
@@ -180,7 +185,7 @@ const AICryptoData = () => {
             <p className="text-md font-normal mb-4">
               Crypto Ai Sector Market Cap
             </p>
-            <h4 className="font-light text-4xl">
+            <h4 className="font-light text-2xl md:text-4xl">
               {formatter.format(aiMarketData.marketCap)}
             </h4>
           </CardHeader>
@@ -190,7 +195,7 @@ const AICryptoData = () => {
             <p className="text-md font-normal mb-4">
               Crypto Ai Sector Daily Volume
             </p>
-            <h4 className=" font-light text-4xl">
+            <h4 className=" font-light text-2xl md:text-4xl">
               {formatter.format(aiMarketData.dailyVolume)}
             </h4>
           </CardHeader>

@@ -1,18 +1,33 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import highcharts3d from "highcharts/highcharts-3d";
 import HighchartsExporting from "highcharts/modules/exporting";
+import { useEffect, useState } from "react";
 
 if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
   highcharts3d(Highcharts);
 }
 
-export const PieChart = () => {
-  const pieChartOptions = {
+export const PieChart = ({
+  title,
+  data,
+  legendEnabled,
+  className,
+  height,
+}: {
+  title: string;
+  data: any;
+  legendEnabled: boolean;
+  className?: string;
+  height?: number;
+}) => {
+  const [pieChartOptions, setPieChartOptions] = useState<any>({
     chart: {
+      height,
       type: "pie",
       options3d: {
         enabled: true,
@@ -28,7 +43,7 @@ export const PieChart = () => {
       },
     },
     title: {
-      text: "Tokenomics",
+      text: title,
       align: "center",
       style: {
         color: "#FFFFFF",
@@ -41,14 +56,14 @@ export const PieChart = () => {
       },
     },
     tooltip: {
-      pointFormat: "{series.name}: <b>{point.y}%</b>",
+      pointFormat: "<b>{point.y:.2f}%</b>",
     },
     plotOptions: {
       pie: {
         allowPointSelect: true,
         cursor: "pointer",
         depth: 35,
-        showInLegend: true,
+        showInLegend: legendEnabled,
         dataLabels: {
           enabled: true,
           format: "{point.name}",
@@ -60,54 +75,33 @@ export const PieChart = () => {
     series: [
       {
         type: "pie",
-        name: "Tokenomics",
+        name: title,
         slicedOffset: 18,
-        data: [
-          {
-            name: "Team / Partnerships (Linear vesting over 18 months)",
-            y: 15,
-            sliced: true,
-            selected: false,
-          },
-          {
-            name: "Staking",
-            y: 10,
-            sliced: true,
-            selected: false,
-          },
-          {
-            name: "Airdrop/Marketing",
-            y: 10,
-            sliced: true,
-            selected: false,
-          },
-          {
-            name: "Presale",
-            y: 2,
-            sliced: true,
-            selected: false,
-          },
-          {
-            name: "Liquidity",
-            y: 53,
-            sliced: true,
-            selected: false,
-          },
-          {
-            name: "Trading Tax (On all buy and sell orders)",
-            y: 5,
-            sliced: true,
-            selected: false,
-          },
-        ],
+        data: [],
       },
     ],
-  };
+  });
+
+  useEffect(() => {
+    setPieChartOptions({
+      ...pieChartOptions,
+      series: [
+        {
+          type: "pie",
+          name: title,
+          slicedOffset: 18,
+          data: data,
+        },
+      ],
+    });
+  }, [data, title]);
 
   return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={pieChartOptions} />
-    </div>
+    <HighchartsReact
+      className={cn(className)}
+      highcharts={Highcharts}
+      options={pieChartOptions}
+    />
   );
 };
 

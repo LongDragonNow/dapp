@@ -213,7 +213,48 @@ export default function Home() {
         </section>
 
         <section id="tokenomics" className="mt-10 w-full container ">
-          <PieChart />
+          <PieChart
+            title={"Tokenomics"}
+            legendEnabled
+            data={[
+              {
+                name: "Team / Partnerships (Linear vesting over 18 months)",
+                y: 15,
+                sliced: true,
+                selected: false,
+              },
+              {
+                name: "Staking",
+                y: 10,
+                sliced: true,
+                selected: false,
+              },
+              {
+                name: "Airdrop/Marketing",
+                y: 10,
+                sliced: true,
+                selected: false,
+              },
+              {
+                name: "Presale",
+                y: 2,
+                sliced: true,
+                selected: false,
+              },
+              {
+                name: "Liquidity",
+                y: 53,
+                sliced: true,
+                selected: false,
+              },
+              {
+                name: "Trading Tax (On all buy and sell orders)",
+                y: 5,
+                sliced: true,
+                selected: false,
+              },
+            ]}
+          />
         </section>
 
         <section className="h-screen mt-10 w-full container flex flex-col items-center justify-center">

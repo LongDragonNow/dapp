@@ -1,11 +1,11 @@
 "use client";
 
+import TokenTable from "@/components/token-table";
 import supabase from "@/lib/supabase";
 import { Avatar, Spinner } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Timeline } from "react-twitter-widgets";
-import { TokenTable } from "../../sector/page";
 
 export default function Page({
   params,

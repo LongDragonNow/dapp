@@ -258,15 +258,30 @@ const CryptoData = () => {
     }
   };
 
-  const fetchCategories = async () => {
+  const fetchCategories = async (forceRefresh = false) => {
+    const cacheKey = "categories";
+    const cachedData = localStorage.getItem(cacheKey);
+    const isCacheValid =
+      cachedData &&
+      Date.now() - JSON.parse(cachedData).timestamp < 15 * 60 * 1000; // Cache duration of 15 minutes
+
+    if (isCacheValid && !forceRefresh) {
+      setCategories(JSON.parse(cachedData).data);
+      return;
+    }
+
     try {
       const response = await axios.get(
         "https://api.coingecko.com/api/v3/coins/categories/list"
       );
 
       setCategories(response.data);
-    } catch {
-      console.error("Error fetching categories");
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({ timestamp: Date.now(), data: response.data })
+      );
+    } catch (error) {
+      console.error("Error fetching data: ", error);
     }
   };
 
@@ -388,7 +403,7 @@ const CryptoData = () => {
 
   useEffect(() => {
     fetchCategories();
-    fetchData(true, "artificial-intelligence");
+    fetchData(false, "artificial-intelligence");
     fetchFullTokens();
   }, []);
 

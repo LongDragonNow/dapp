@@ -21,6 +21,7 @@ import {
 } from "@nextui-org/react";
 import { Alchemy, Network, Utils } from "alchemy-sdk";
 import axios from "axios";
+import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
@@ -121,32 +122,32 @@ const CryptoData = () => {
     }[]
   >([]);
 
-  const [marketData, setMarketData] = useState({
-    marketCap: 0,
-    dailyVolume: 0,
-    tokens: [],
-  });
+  const [marketData, setMarketData] = useState([]);
 
   const [allTokens, setAllTokens] = useState([]);
 
   const [categories, setCategories] = useState<
     {
-      category_id: string;
+      id: string;
       name: string;
+      market_cap: number;
+      market_cap_change_24h: number;
+      volume_24h: number;
     }[]
-  >([
-    {
-      category_id: "artificial-intelligence",
-      name: "Artificial Intelligence (AI)",
-    },
-  ]);
+  >([]);
 
   const [currentCategory, setCurrentCategory] = useState<{
-    category_id: string;
+    id: string;
     name: string;
+    market_cap: number;
+    market_cap_change_24h: number;
+    volume_24h: number;
   }>({
-    category_id: "artificial-intelligence",
+    id: "artificial-intelligence",
     name: "Artificial Intelligence (AI)",
+    market_cap: 0,
+    market_cap_change_24h: 0,
+    volume_24h: 0,
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -267,15 +268,25 @@ const CryptoData = () => {
 
     if (isCacheValid && !forceRefresh) {
       setCategories(JSON.parse(cachedData).data);
+      setCurrentCategory(
+        JSON.parse(cachedData).data.find(
+          (el: any) => el.id === currentCategory.id
+        )
+      );
       return;
     }
 
     try {
       const response = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/categories/list"
+        "https://api.coingecko.com/api/v3/coins/categories"
       );
 
       setCategories(response.data);
+
+      setCurrentCategory(
+        response.data.find((el: any) => el.id === currentCategory.id)
+      );
+
       localStorage.setItem(
         cacheKey,
         JSON.stringify({ timestamp: Date.now(), data: response.data })
@@ -289,7 +300,7 @@ const CryptoData = () => {
     forceRefresh = false,
     category: string | undefined
   ) => {
-    const categoryName = category || currentCategory.category_id;
+    const categoryName = category || currentCategory.id;
     const cacheKey = categoryName;
     const cachedData = localStorage.getItem(cacheKey);
     const isCacheValid =
@@ -314,25 +325,15 @@ const CryptoData = () => {
         }
       );
 
-      const data = {
-        marketCap: response.data.reduce(
-          (acc: any, coin: any) => acc + coin.market_cap,
-          0
-        ) as number,
-        dailyVolume: response.data.reduce(
-          (acc: any, coin: any) => acc + coin.total_volume,
-          0
-        ) as number,
-        tokens: response.data.map((coin: any) => ({
-          name: coin.name,
-          id: coin.id,
-          logo: coin.image,
-          price: coin.current_price,
-          change1d: coin.price_change_percentage_24h,
-          marketCap: coin.market_cap,
-          ticker: coin.symbol,
-        })),
-      };
+      const data = response.data.map((coin: any) => ({
+        name: coin.name,
+        id: coin.id,
+        logo: coin.image,
+        price: coin.current_price,
+        change1d: coin.price_change_percentage_24h,
+        marketCap: coin.market_cap,
+        ticker: coin.symbol,
+      }));
 
       setMarketData(data);
       localStorage.setItem(
@@ -434,17 +435,15 @@ const CryptoData = () => {
         className="max-w-xs border-2 border-gold rounded-xl"
         selectedKey={selectedCategory}
         onSelectionChange={(selected) => {
-          const category = categories.find((el) => el.category_id === selected);
+          const category = categories.find((el) => el.id === selected);
           if (!category) return;
           setCurrentCategory(category);
-          setSelectedCategory(category.category_id);
-          fetchData(true, category.category_id);
+          setSelectedCategory(category.id);
+          fetchData(true, category.id);
         }}
       >
         {(item) => (
-          <AutocompleteItem key={item.category_id}>
-            {item.name}
-          </AutocompleteItem>
+          <AutocompleteItem key={item.id}>{item.name}</AutocompleteItem>
         )}
       </Autocomplete>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -457,9 +456,21 @@ const CryptoData = () => {
                 <p className="text-md font-normal mb-4">
                   {currentCategory.name} Sector Market Cap
                 </p>
-                <h4 className="font-light text-2xl md:text-4xl">
-                  {formatter.format(marketData.marketCap)}
-                </h4>
+                <div className="w-full flex flex-row justify-between items-center">
+                  <h4 className="font-light text-2xl md:text-4xl">
+                    {formatter.format(currentCategory.market_cap)}{" "}
+                  </h4>
+                  <h4
+                    className={clsx(
+                      "ml-auto text-xl md:text-2xl",
+                      currentCategory.market_cap_change_24h >= 0
+                        ? "text-green-600"
+                        : "text-red-600"
+                    )}
+                  >
+                    {currentCategory.market_cap_change_24h.toFixed(2)}%
+                  </h4>
+                </div>
               </>
             )}
           </CardHeader>
@@ -474,7 +485,7 @@ const CryptoData = () => {
                   {currentCategory.name} Sector Daily Volume
                 </p>
                 <h4 className=" font-light text-2xl md:text-4xl">
-                  {formatter.format(marketData.dailyVolume)}
+                  {formatter.format(currentCategory.volume_24h)}
                 </h4>
               </>
             )}
@@ -506,7 +517,7 @@ const CryptoData = () => {
             <Spinner color="white" />
           ) : (
             <>
-              <p className="text-2xl">Influencer recommendations</p>
+              <p className="text-2xl">KOL Coins</p>
 
               {influencers.map((influencer) => (
                 <Card
@@ -560,7 +571,7 @@ const CryptoData = () => {
 
       <TokenTable
         isLoading={isLoading}
-        title={`Token Recommendations`}
+        title={`Top Picks`}
         tokens={allTokens.filter((el: any) =>
           recommendedTokens.includes(el.ticker.toLowerCase())
         )}
@@ -569,7 +580,7 @@ const CryptoData = () => {
       <TokenTable
         isLoading={isLoading}
         title={`${currentCategory.name} Tokens`}
-        tokens={marketData.tokens}
+        tokens={marketData}
       />
     </main>
   );

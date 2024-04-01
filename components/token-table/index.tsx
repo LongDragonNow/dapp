@@ -71,12 +71,12 @@ const TokenTable = ({
                 )}
               >
                 <span className="text-medium md:text-lg">
-                  {Number(token.change1d).toFixed(2)}%
+                  {Number(token.change1d ?? "0").toFixed(2)}%
                 </span>
               </TableCell>
               <TableCell>
                 <span className="text-medium md:text-lg">
-                  ${token.marketCap.toLocaleString()}
+                  ${(token.marketCap ?? 0).toLocaleString()}
                 </span>
               </TableCell>
             </TableRow>

@@ -125,7 +125,7 @@ export default function Page({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <TokenTable
           isLoading={isLoading}
-          title={`Token Recommendations`}
+          title={`Token Holdings`}
           tokens={allTokens.filter((el: any) =>
             influencer.recommended_tickers.includes(el.ticker.toLowerCase())
           )}

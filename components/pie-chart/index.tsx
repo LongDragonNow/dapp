@@ -25,66 +25,56 @@ export const PieChart = ({
   className?: string;
   height?: number;
 }) => {
-  const [pieChartOptions, setPieChartOptions] = useState<any>({
-    chart: {
-      height,
-      type: "pie",
-      options3d: {
-        enabled: true,
-        alpha: 45,
-        beta: 0,
-      },
-      backgroundColor: "#000000",
-    },
-    legend: {
-      itemStyle: {
-        color: "#FFFFFF",
-        font: 'thin 16px "PPNeueMachina", sans-serif',
-      },
-    },
-    title: {
-      text: title,
-      align: "center",
-      style: {
-        color: "#FFFFFF",
-        font: 'bold 24px "PPNeueMachina", sans-serif',
-      },
-    },
-    accessibility: {
-      point: {
-        valueSuffix: "%",
-      },
-    },
-    tooltip: {
-      pointFormat: "<b>{point.y:.2f}%</b>",
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
-        depth: 35,
-        showInLegend: legendEnabled,
-        dataLabels: {
-          enabled: true,
-          format: "{point.name}",
-        },
-        colors: ["#b8a159"],
-        borderColor: "#000000",
-      },
-    },
-    series: [
-      {
-        type: "pie",
-        name: title,
-        slicedOffset: 18,
-        data: [],
-      },
-    ],
-  });
+  const [pieChartOptions, setPieChartOptions] = useState<any>(null);
 
   useEffect(() => {
-    setPieChartOptions({
-      ...pieChartOptions,
+    const options = {
+      chart: {
+        height,
+        type: "pie",
+        options3d: {
+          enabled: true,
+          alpha: 45,
+          beta: 0,
+        },
+        backgroundColor: "#000000",
+      },
+      legend: {
+        itemStyle: {
+          color: "#FFFFFF",
+          font: 'thin 16px "PPNeueMachina", sans-serif',
+        },
+      },
+      title: {
+        text: title,
+        align: "center",
+        style: {
+          color: "#FFFFFF",
+          font: 'bold 24px "PPNeueMachina", sans-serif',
+        },
+      },
+      accessibility: {
+        point: {
+          valueSuffix: "%",
+        },
+      },
+      tooltip: {
+        pointFormat: "<b>{point.y:.2f}%</b>",
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: "pointer",
+          depth: 35,
+          showInLegend: legendEnabled,
+          dataLabels: {
+            enabled: true,
+            format: "{point.name}",
+          },
+          colors: ["#b8a159"],
+          borderColor: "#000000",
+        },
+      },
       series: [
         {
           type: "pie",
@@ -93,15 +83,23 @@ export const PieChart = ({
           data: data,
         },
       ],
-    });
+    };
+
+    if (data && data.length > 0) {
+      setPieChartOptions({
+        options,
+      });
+    }
   }, [data, title]);
 
-  return (
+  return data && data.length > 0 ? (
     <HighchartsReact
       className={cn(className)}
       highcharts={Highcharts}
       options={pieChartOptions}
     />
+  ) : (
+    <p>No data</p>
   );
 };
 

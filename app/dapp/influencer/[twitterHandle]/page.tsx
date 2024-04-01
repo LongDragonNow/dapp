@@ -5,7 +5,7 @@ import supabase from "@/lib/supabase";
 import { Avatar, Spinner } from "@nextui-org/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Timeline } from "react-twitter-widgets";
+import { Follow, Timeline } from "react-twitter-widgets";
 
 export default function Page({
   params,
@@ -109,6 +109,18 @@ export default function Page({
         className="border-2 border-gold h-28 w-28"
       />
       <h1 className="text-4xl font-bold">{influencer.name}</h1>
+
+      <div
+        className="border-2 border-gold rounded-full overflow-hidden flex flex-grow mb-4"
+        style={{
+          transform: "scale(1.5)",
+        }}
+      >
+        <Follow
+          username={influencer.twitter_handle}
+          options={{ size: "large" }}
+        />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <TokenTable

@@ -108,10 +108,12 @@ const CryptoData = () => {
 
   const router = useRouter();
 
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  // const formatter = new Intl.NumberFormat("en-US", {
+  //   style: "currency",
+  //   currency: "USD",
+  // });
+
+  let formatter = Intl.NumberFormat("en", { notation: "compact" });
 
   const [userTokens, setUserTokens] = useState<
     {
@@ -281,15 +283,24 @@ const CryptoData = () => {
         "https://api.coingecko.com/api/v3/coins/categories"
       );
 
-      setCategories(response.data);
+      const filteredCategories = response.data.filter(
+        (el: any) =>
+          el.id === "artificial-intelligence" ||
+          el.id === "layer-0-l0" ||
+          el.id === "layer-1" ||
+          el.id === "layer-2" ||
+          el.id === "meme-token"
+      );
+
+      setCategories(filteredCategories);
 
       setCurrentCategory(
-        response.data.find((el: any) => el.id === currentCategory.id)
+        filteredCategories.find((el: any) => el.id === currentCategory.id)
       );
 
       localStorage.setItem(
         cacheKey,
-        JSON.stringify({ timestamp: Date.now(), data: response.data })
+        JSON.stringify({ timestamp: Date.now(), data: filteredCategories })
       );
     } catch (error) {
       console.error("Error fetching data: ", error);
@@ -430,7 +441,7 @@ const CryptoData = () => {
         allowsCustomValue={false}
         allowsEmptyCollection={false}
         variant="flat"
-        defaultItems={categories}
+        defaultItems={categories.sort((a, b) => a.name.localeCompare(b.name))}
         placeholder="Search for a category"
         className="max-w-xs border-2 border-gold rounded-xl"
         selectedKey={selectedCategory}
@@ -453,13 +464,18 @@ const CryptoData = () => {
               <Spinner color="white" />
             ) : (
               <>
-                <p className="text-md font-normal mb-4">
-                  {currentCategory.name} Sector Market Cap
-                </p>
+                <div className="w-full flex flex-row justify-between align-baseline items-baseline">
+                  <p className="text-md font-normal mb-4">
+                    {currentCategory.name} Sector Market Cap
+                  </p>
+                  <span className="text-tiny">24hr % change</span>
+                </div>
+
                 <div className="w-full flex flex-row justify-between items-center">
                   <h4 className="font-light text-2xl md:text-4xl">
-                    {formatter.format(currentCategory.market_cap)}{" "}
+                    {formatter.format(currentCategory.market_cap)}
                   </h4>
+
                   <h4
                     className={clsx(
                       "ml-auto text-xl md:text-2xl",

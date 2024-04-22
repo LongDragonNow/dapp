@@ -319,7 +319,7 @@ function InfluencerForm({ influencer, onSave, className }: any) {
                 .map((el) => el.trim()) as any
             )
           }
-          placeholder="Recommended Tickers (comma-separated)"
+          placeholder="Token id from CoinGecko (comma-separated)"
         />
         <Button color="primary" type="submit">
           Save
@@ -372,7 +372,7 @@ function TokenForm({ token, onSave, className }: any) {
           id="ticker"
           value={ticker}
           onChange={(e) => setTicker(e.target.value.toLowerCase())}
-          placeholder="Enter token ticker"
+          placeholder="Enter token id from CoinGecko"
           required
         />
         <Button color="primary" type="submit">

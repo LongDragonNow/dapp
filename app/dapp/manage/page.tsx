@@ -23,26 +23,44 @@ function Manage() {
   const [editingToken, setEditingToken] = useState<any>(null);
 
   const [allTokens, setAllTokens] = useState([]);
+  const [tokenInfo, setTokenInfo] = useState<
+    {
+      id: string;
+      symbol: string;
+      name: string;
+    }[]
+  >([]);
 
   const checkCode = (code: string) => {
     setIsCodeValid(code === process.env.NEXT_PUBLIC_CODE);
   };
 
-  const fetchFullTokens = async (forceRefresh = true) => {
-    const cacheKey = "all-tokens";
-    const cachedData = localStorage.getItem(cacheKey);
-    const isCacheValid =
-      cachedData &&
-      Date.now() - JSON.parse(cachedData).timestamp < 15 * 60 * 1000; // Cache duration of 15 minutes
+  // const fetchFullTokens = async () => {
+  //   try {
+  //     const tokenResponse = await axios.get(
+  //       `https://pro-api.coingecko.com/api/v3/coins/list?x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
+  //     );
 
-    if (isCacheValid && !forceRefresh) {
-      setAllTokens(JSON.parse(cachedData).data);
-      return;
-    }
+  //     setTokenInfo(tokenResponse.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data: ", error);
+  //   }
+  // };
 
+  const fetchNeededTokens = async () => {
     try {
+      const influencerTickers = influencers
+        .map((influencer: any) => influencer.recommended_tickers)
+        .flat();
+
+      const tokenTickers = tokens.map((token: any) => token.ticker);
+
+      const neededTokens = [...Array.from(tokenTickers), ...influencerTickers];
+
+      const tokenIds = neededTokens.join(",");
+
       const response = await axios.get(
-        `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=800&page=1&sparkline=false&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
+        `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${tokenIds}&order=market_cap_desc&sparkline=false&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
       );
 
       const data = response.data.map((coin: any) => ({
@@ -56,10 +74,6 @@ function Manage() {
       }));
 
       setAllTokens(data);
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({ timestamp: Date.now(), data })
-      );
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
@@ -67,22 +81,32 @@ function Manage() {
 
   // Load data from the database
   useEffect(() => {
-    fetchInfluencers();
-    fetchTokens();
-    fetchFullTokens();
+    const fetch = async () => {
+      await fetchInfluencers();
+      await fetchTokens();
+    };
+    fetch();
   }, []);
 
   const fetchInfluencers = async () => {
     let { data, error } = await supabase.from("influencers").select("*");
     if (error) console.log("error", error);
-    else setInfluencers(data);
+    else {
+      setInfluencers(data);
+    }
   };
 
   const fetchTokens = async () => {
     let { data, error } = await supabase.from("recommended_tokens").select("*");
     if (error) console.log("error", error);
-    else setTokens(data);
+    else {
+      setTokens(data);
+    }
   };
+
+  useEffect(() => {
+    fetchNeededTokens();
+  }, [influencers, tokens]);
 
   // Add or update token
   const saveToken = async (token: any) => {
@@ -153,7 +177,7 @@ function Manage() {
   }
 
   return (
-    <div className="container">
+    <div className="container pb-4">
       <p className="text-2xl font-normal text-center mt-4">Influencers</p>
 
       <div className="flex flex-col md:flex-row gap-4 ">
@@ -172,12 +196,10 @@ function Manage() {
                 }}
               />
 
-              <AvatarGroup isBordered max={20}>
+              <AvatarGroup isBordered max={40}>
                 {allTokens
                   .filter((el: any) =>
-                    influencer.recommended_tickers.includes(
-                      el.ticker.toLowerCase()
-                    )
+                    influencer.recommended_tickers.includes(el.id)
                   )
                   .map((token: any) => (
                     <Avatar key={token.id} src={token.logo} alt={token.name} />
@@ -215,12 +237,10 @@ function Manage() {
         <div className="w-full flex flex-col gap-2">
           {allTokens
             .filter((el: any) =>
-              (
-                tokens?.map((el: any) => el.ticker.toLowerCase()) ?? []
-              ).includes(el.ticker.toLowerCase())
+              (tokens?.map((el: any) => el.ticker) ?? []).includes(el.id)
             )
             .map((token: any) => (
-              <Card className="flex flex-row p-4">
+              <Card key={token.id} className="flex flex-row p-4">
                 <User
                   key={token.id}
                   name={token.name}
@@ -325,10 +345,14 @@ function TokenForm({ token, onSave, className }: any) {
       alert("Please provide a ticker.");
       return;
     }
+
+    const actualTicker = ticker.includes(",")
+      ? ticker.split(",")[0].trim()
+      : ticker;
     // Prepare the data object to save
     const data = {
       id: token?.id, // Include the id if it's an update
-      ticker,
+      ticker: actualTicker.toLowerCase(),
     };
 
     // Call onSave prop passed from parent component
@@ -347,7 +371,7 @@ function TokenForm({ token, onSave, className }: any) {
           type="text"
           id="ticker"
           value={ticker}
-          onChange={(e) => setTicker(e.target.value)}
+          onChange={(e) => setTicker(e.target.value.toLowerCase())}
           placeholder="Enter token ticker"
           required
         />

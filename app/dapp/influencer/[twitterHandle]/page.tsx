@@ -48,23 +48,18 @@ export default function Page({
     };
   }, []);
 
-  const fetchFullTokens = async (forceRefresh = true) => {
-    const cacheKey = "all-tokens";
-    const cachedData = localStorage.getItem(cacheKey);
-    const isCacheValid =
-      cachedData &&
-      Date.now() - JSON.parse(cachedData).timestamp < 15 * 60 * 1000; // Cache duration of 15 minutes
-
-    if (isCacheValid && !forceRefresh) {
-      setAllTokens(JSON.parse(cachedData).data);
-      return;
-    }
-
-    setIsLoading(true);
+  const fetchNeededTokens = async () => {
+    if (!influencer) return;
 
     try {
+      const tokenTickers = influencer.recommended_tickers.map(
+        (token: any) => token.ticker
+      );
+
+      const tokenIds = tokenTickers.join(",");
+
       const response = await axios.get(
-        `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=1000&page=1&sparkline=false&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
+        `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${tokenIds}&order=market_cap_desc&sparkline=false&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
       );
 
       const data = response.data.map((coin: any) => ({
@@ -78,20 +73,14 @@ export default function Page({
       }));
 
       setAllTokens(data);
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({ timestamp: Date.now(), data })
-      );
     } catch (error) {
       console.error("Error fetching data: ", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchFullTokens(true);
-  }, []);
+    fetchNeededTokens();
+  }, [influencer]);
 
   if (!influencer) {
     return (
@@ -127,7 +116,7 @@ export default function Page({
           isLoading={isLoading}
           title={`Token Holdings`}
           tokens={allTokens.filter((el: any) =>
-            influencer.recommended_tickers.includes(el.ticker.toLowerCase())
+            influencer.recommended_tickers.includes(el.id)
           )}
         />
 

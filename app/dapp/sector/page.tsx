@@ -220,47 +220,6 @@ const CryptoData = () => {
     | null
   >(null);
 
-  const fetchFullTokens = async (forceRefresh = true) => {
-    const cacheKey = "all-tokens";
-    const cachedData = localStorage.getItem(cacheKey);
-    const isCacheValid =
-      cachedData &&
-      Date.now() - JSON.parse(cachedData).timestamp < 15 * 60 * 1000; // Cache duration of 15 minutes
-
-    if (isCacheValid && !forceRefresh) {
-      setAllTokens(JSON.parse(cachedData).data);
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const response = await axios.get(
-        `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=800&page=1&sparkline=false&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
-      );
-
-      const data = response.data.map((coin: any) => ({
-        name: coin.name,
-        id: coin.id,
-        logo: coin.image,
-        price: coin.current_price,
-        change1d: coin.price_change_percentage_24h,
-        marketCap: coin.market_cap,
-        ticker: coin.symbol,
-      }));
-
-      setAllTokens(data);
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({ timestamp: Date.now(), data })
-      );
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const fetchCategories = async (forceRefresh = true) => {
     const cacheKey = "categories";
     const cachedData = localStorage.getItem(cacheKey);
@@ -302,6 +261,43 @@ const CryptoData = () => {
         cacheKey,
         JSON.stringify({ timestamp: Date.now(), data: filteredCategories })
       );
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
+
+  const fetchNeededTokens = async () => {
+    if (!influencers) return;
+    if (!recommendedTokens) return;
+
+    try {
+      const influencerTickers = influencers
+        .map((influencer: any) => influencer.recommended_tickers)
+        .flat();
+
+      const tokenTickers = recommendedTokens.map((token: any) => token.ticker);
+
+      const neededTokens = [...Array.from(tokenTickers), ...influencerTickers];
+
+      const tokenIds = neededTokens.join(",");
+
+      console.log(tokenIds);
+
+      const response = await axios.get(
+        `https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${tokenIds}&order=market_cap_desc&sparkline=false&locale=en&x_cg_pro_api_key=${process.env.NEXT_PUBLIC_CG_API_KEY}`
+      );
+
+      const data = response.data.map((coin: any) => ({
+        name: coin.name,
+        id: coin.id,
+        logo: coin.image,
+        price: coin.current_price,
+        change1d: coin.price_change_percentage_24h,
+        marketCap: coin.market_cap,
+        ticker: coin.symbol,
+      }));
+
+      setAllTokens(data);
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
@@ -416,7 +412,6 @@ const CryptoData = () => {
   useEffect(() => {
     fetchCategories();
     fetchData(false, "artificial-intelligence");
-    fetchFullTokens();
   }, []);
 
   useEffect(() => {
@@ -424,6 +419,10 @@ const CryptoData = () => {
       getUserTokenBalances();
     }
   }, [address]);
+
+  useEffect(() => {
+    fetchNeededTokens();
+  }, [influencers, recommendedTokens]);
 
   const [selectedCategory, setSelectedCategory] = useState(
     "artificial-intelligence"
@@ -563,12 +562,10 @@ const CryptoData = () => {
                     }}
                   />
 
-                  <AvatarGroup isBordered max={3}>
+                  <AvatarGroup isBordered max={40}>
                     {allTokens
                       .filter((el: any) =>
-                        influencer.recommended_tickers.includes(
-                          el.ticker.toLowerCase()
-                        )
+                        influencer.recommended_tickers.includes(el.id)
                       )
                       .map((token: any) => (
                         <Avatar
@@ -589,7 +586,7 @@ const CryptoData = () => {
         isLoading={isLoading}
         title={`Top Picks`}
         tokens={allTokens.filter((el: any) =>
-          recommendedTokens.includes(el.ticker.toLowerCase())
+          recommendedTokens.includes(el.id)
         )}
       />
 

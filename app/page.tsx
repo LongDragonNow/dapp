@@ -14,7 +14,7 @@ export default function Home() {
     {
       title: "Phase 1",
       description:
-        "In this phase, Long Dragon focuses on establishing a robust infrastructure, including the launch of the staking platform and initial liquidity pools. Community engagement is prioritized through airdrop farming and the introduction of the DeGen Box, fostering a strong and active user base.",
+        "In this phase, Long Dragon focuses on establishing a robust infrastructure, including the launch of the staking platform and initial liquidity pools. Community engagement is prioritized through airdrop farming and the introduction of the War Chest, fostering a strong and active user base.",
     },
     {
       title: "Phase 2",
@@ -129,15 +129,15 @@ export default function Home() {
               <CardBody>
                 <EvervaultCard
                   className="h-[350px]"
-                  text="DeGen Chest"
+                  text="War Chest"
                   imageUrl="/dragon3.webp"
                 />
                 <p className="p-8 text-center md:text-start">
-                  The DeGen Chest is an innovative feature within the Long
-                  Dragon ecosystem designed to offer unique and potentially
-                  high-reward opportunities. It leverages the collective
-                  expertise of the Long Dragon DAO to identify and capitalize on
-                  emerging trends and projects in the Crypto space
+                  The War Chest is an innovative feature within the Long Dragon
+                  ecosystem designed to offer unique and potentially high-reward
+                  opportunities. It leverages the collective expertise Market
+                  Makers and VCs to capitalize on emerging trends and projects
+                  in the Crypto space
                 </p>
               </CardBody>
             </Card>
@@ -161,17 +161,11 @@ export default function Home() {
                 words={"Introducing Long Dragon ($LD)"}
               />
               <span className="mt-4 text-md leading-7 text-center md:text-start">
-                The Long Dragon project has been created to address several
-                challenges prevalent in current DeFi ecosystems, including but
-                not limited to the lack of comprehensive staking platforms with
-                multiple reward streams, farming protocols that inadequately
-                reward up and coming projects, ineffective decentralized venture
-                capital (VC) fund structures, non-user-friendly launchpads for
-                Web 2.0 investors and the absence of the availability of
-                interpreted blockchain data. Our overarching aim is to merge the
-                user benefits and accessibility of Web 2.0 with the
-                decentralization and advanced technology of Web 3.0 by
-                addressing the aforementioned problems.
+                The Long Dragon project has been created to effectively allow
+                it&apos;s stakers to participate in the same marketplace as
+                whales with all the benefits that come along with size. Higher
+                yield opportunities, better pre-sales, highest quality airdrops,
+                and Market Making opportunities.
               </span>
             </div>
           </div>

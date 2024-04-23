@@ -3,7 +3,7 @@ import LandingNavigationBar from "@/components/LandingNavBar";
 import { HoverEffect } from "@/components/card-hover-effect";
 import { EvervaultCard } from "@/components/evervault-card";
 import { GradientButton } from "@/components/gradient-button";
-import { PieChart } from "@/components/pie-chart";
+import { LandingPieChart } from "@/components/landing-pie-chart";
 import { TextGenerateEffect } from "@/components/text-generate-effect";
 import { TracingBeam } from "@/components/tracing-beam";
 import { Card, CardBody } from "@nextui-org/react";
@@ -135,7 +135,7 @@ export default function Home() {
                 <p className="p-8 text-center md:text-start">
                   The War Chest is an innovative feature within the Long Dragon
                   ecosystem designed to offer unique and potentially high-reward
-                  opportunities. It leverages the collective expertise Market
+                  opportunities. It leverages the collective expertise of Market
                   Makers and VCs to capitalize on emerging trends and projects
                   in the Crypto space
                 </p>
@@ -162,10 +162,10 @@ export default function Home() {
               />
               <span className="mt-4 text-md leading-7 text-center md:text-start">
                 The Long Dragon project has been created to effectively allow
-                it&apos;s stakers to participate in the same marketplace as
-                whales with all the benefits that come along with size. Higher
-                yield opportunities, better pre-sales, highest quality airdrops,
-                and Market Making opportunities.
+                its stakers to participate in the same marketplace as whales
+                with all the benefits that come along with size. Higher yield
+                opportunities, better pre-sales, highest quality airdrops, and
+                Market Making opportunities
               </span>
             </div>
           </div>
@@ -207,48 +207,7 @@ export default function Home() {
         </section>
 
         <section id="tokenomics" className="mt-10 w-full container ">
-          <PieChart
-            title={"Tokenomics"}
-            legendEnabled
-            data={[
-              {
-                name: "Team / Partnerships (Linear vesting over 18 months)",
-                y: 15,
-                sliced: true,
-                selected: false,
-              },
-              {
-                name: "Staking",
-                y: 10,
-                sliced: true,
-                selected: false,
-              },
-              {
-                name: "Airdrop/Marketing",
-                y: 10,
-                sliced: true,
-                selected: false,
-              },
-              {
-                name: "Presale",
-                y: 2,
-                sliced: true,
-                selected: false,
-              },
-              {
-                name: "Liquidity",
-                y: 53,
-                sliced: true,
-                selected: false,
-              },
-              {
-                name: "Trading Tax (On all buy and sell orders)",
-                y: 5,
-                sliced: true,
-                selected: false,
-              },
-            ]}
-          />
+          <LandingPieChart />
         </section>
 
         <section className="h-screen mt-10 w-full container flex flex-col items-center justify-center">

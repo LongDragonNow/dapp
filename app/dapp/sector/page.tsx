@@ -7,6 +7,7 @@ import {
   AutocompleteItem,
   Avatar,
   AvatarGroup,
+  Button,
   Card,
   CardHeader,
   Link,
@@ -24,6 +25,7 @@ import axios from "axios";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useAccount } from "wagmi";
 
 const UserTokensTable = ({
@@ -41,7 +43,40 @@ const UserTokensTable = ({
         <p className="p-4 text-2xl">
           Please connect your wallet to see your tokens
         </p>
-        <w3m-button />
+        {/* <w3m-button /> */}
+        <Button
+          color="primary"
+          radius="full"
+          className="text-medium"
+          onPress={() => {
+            toast.custom((t) => (
+              <div className="p-4 bg-black border-3 border-gold text-white flex flex-col justify-center items-center rounded-xl">
+                <div className="text-lg font-bold text-center">
+                  Coming soon!
+                </div>
+                <div className="text-center">
+                  <p>
+                    Wallet Connect is under development and will be available
+                    soon. Please check back later.
+                  </p>
+                </div>
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    toast.dismiss(t);
+                  }}
+                  size="lg"
+                  className="mt-4"
+                >
+                  Close
+                </Button>
+              </div>
+            ));
+          }}
+        >
+          Connect Wallet
+        </Button>
       </div>
     );
 

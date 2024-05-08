@@ -45,7 +45,7 @@ export function ContextProvider({
         <NextUIProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >

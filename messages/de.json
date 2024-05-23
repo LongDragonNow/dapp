@@ -1,0 +1,6 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "in_service_of": "Im Dienste von",
+    "shape_destiny": "Gestalte das Schicksal",
+    "phase": "Phase {num}"
+}

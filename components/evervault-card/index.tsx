@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export const EvervaultCard = ({
   text,
@@ -20,6 +21,11 @@ export const EvervaultCard = ({
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
+
+  useEffect(() => {
+    mouseX.set(100);
+    mouseY.set(100);
+  }, []);
 
   return (
     <div
@@ -45,18 +51,18 @@ export const EvervaultCard = ({
 };
 
 export function CardPattern({ mouseX, mouseY, imageUrl }: any) {
-  let maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
+  let maskImage = useMotionTemplate`radial-gradient(250px at 50% 50%, white, transparent)`;
   let style = { maskImage, WebkitMaskImage: maskImage };
 
   return (
     <div className="pointer-events-none">
-      <div className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
+      <div className="absolute inset-0 rounded-2xl  [mask-image:linear-gradient(white,transparent)] card:opacity-50"></div>
       <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold to-[#deb228] opacity-0  group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
+        className="absolute inset-0 rounded-2xl bg-gradient-to-r from-gold to-[#deb228]   card:opacity-100 backdrop-blur-xl transition duration-500"
         style={style}
       />
       <motion.div
-        className="absolute inset-0 rounded-2xl opacity-80 mix-blend-overlay  group-hover/card:opacity-100"
+        className="absolute inset-0 rounded-2xl opacity-80 mix-blend-overlay  card:opacity-100"
         style={style}
       >
         <div className="absoulte inset-x-0 h-[350px] transition duration-500">

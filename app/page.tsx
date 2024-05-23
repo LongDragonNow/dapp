@@ -6,23 +6,24 @@ import { GradientButton } from "@/components/gradient-button";
 import { LandingPieChart } from "@/components/landing-pie-chart";
 import { TextGenerateEffect } from "@/components/text-generate-effect";
 import { TracingBeam } from "@/components/tracing-beam";
+import * as m from "@/paraglide/messages";
 import { Card, CardBody } from "@nextui-org/react";
 import Image from "next/image";
 
 export default function Home() {
   const projects = [
     {
-      title: "Phase 1",
+      title: m.phase({ num: 1 }),
       description:
         "In this phase, Long Dragon focuses on establishing a robust infrastructure, including the launch of the staking platform and initial liquidity pools. Community engagement is prioritized through airdrop farming and the introduction of the War Chest, fostering a strong and active user base.",
     },
     {
-      title: "Phase 2",
+      title: m.phase({ num: 2 }),
       description:
         "The project expands its offerings by launching the user-friendly Launchpad and implementing the farming protocols. The $LD Fund and incubation program are introduced, diversifying investment opportunities and supporting innovative projects. This phase aims to attract a broader audience and increase the ecosystem's value.",
     },
     {
-      title: "Phase 3",
+      title: m.phase({ num: 3 }),
       description:
         "Long Dragon consolidates its position by enhancing its data room capabilities and refining its platforms based on user feedback. The focus shifts to scaling the ecosystem, increasing interoperability, and fostering partnerships. This phase aims to establish Long Dragon as a leading DeFi ecosystem with sustained growth.",
     },
@@ -32,57 +33,20 @@ export default function Home() {
     <main className="flex flex-col items-center">
       <LandingNavigationBar className="md:sticky md:container md:top-4 md:z-5" />
 
-      <div
-        className="absolute h-screen w-full bg-cover bg-no-repeat bg-center"
-        style={{
-          backgroundImage:
-            "linear-gradient(180deg, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%)",
-        }}
-        suppressHydrationWarning
-      >
-        <Image
-          fill
-          className="hidden md:block object-center object-cover pointer-events-none"
-          src="/hero.png"
-          alt="Long Dragon"
-        />
-        <Image
-          fill
-          className="md:hidden object-center object-cover pointer-events-none"
-          src="/hero-mobile.png"
-          alt="Long Dragon"
-        />
-      </div>
-
       <video
-        className="w-full h-screen absolute top-0 left-0 mix-blend-color-dodge object-fill"
+        className="w-full h-screen absolute bottom-0 left-0 object-fit"
         autoPlay
         muted
         playsInline
         loop
       >
-        <source src="/dust.mp4" type="video/mp4" />
-      </video>
-
-      <video
-        className="w-full h-screen absolute bottom-0 left-0 mix-blend-color-dodge object-fill"
-        autoPlay
-        muted
-        playsInline
-        loop
-      >
-        <source src="/fog.mp4" type="video/mp4" />
+        <source src="/dragon-background.mp4" type="video/mp4" />
       </video>
 
       <section className="container z-10 h-screen flex flex-col justify-center items-center md:items-start gap-3">
-        <p className="text-5xl mb-4 text-center md:text-start">Shape Destiny</p>
-        <p className="text-2x">In service of</p>
-        <Image
-          src="/render-text.webp"
-          alt="Render network"
-          width={300}
-          height={150}
-        />
+        <p className="text-5xl mb-4 text-center md:text-start">
+          {m.shape_destiny()}
+        </p>
 
         <GradientButton />
       </section>

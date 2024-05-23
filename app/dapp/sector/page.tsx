@@ -23,7 +23,7 @@ import {
 import { Alchemy, Network, Utils } from "alchemy-sdk";
 import axios from "axios";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useAccount } from "wagmi";

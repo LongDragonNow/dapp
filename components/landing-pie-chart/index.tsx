@@ -89,13 +89,7 @@ export const LandingPieChart = () => {
           },
           {
             name: "Liquidity",
-            y: 53,
-            sliced: true,
-            selected: false,
-          },
-          {
-            name: "Trading Tax (On all buy and sell orders)",
-            y: 5,
+            y: 63,
             sliced: true,
             selected: false,
           },

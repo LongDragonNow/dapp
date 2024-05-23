@@ -138,7 +138,7 @@ export default function LandingNavigationBar({
         <NavbarItem>
           <Dropdown>
             <DropdownTrigger>
-              <Button size="lg" color="primary" variant="flat">
+              <Button size="md" color="primary" variant="flat">
                 Litepaper
               </Button>
             </DropdownTrigger>
@@ -162,7 +162,7 @@ export default function LandingNavigationBar({
         </NavbarItem>
         <NavbarItem className="md:hidden lg:block">
           <Button
-            size="lg"
+            size="md"
             color="primary"
             variant="ghost"
             onPress={() => {

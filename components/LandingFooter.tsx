@@ -13,7 +13,7 @@ export default function LandingFooter({ className }: { className?: string }) {
       </nav>
       <div className="flex justify-center mt-8 space-x-6">
         <a
-          href="https://t.me/longdragonai"
+          href="https://t.me/+6afNDnVhfjZiNzEx"
           target="_blank"
           className="text-white "
         >

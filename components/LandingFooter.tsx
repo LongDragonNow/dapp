@@ -11,7 +11,16 @@ export default function LandingFooter({ className }: { className?: string }) {
           <Link href="#">Privacy Policy</Link>
         </div> */}
       </nav>
+
       <div className="flex justify-center mt-8 space-x-6">
+        <a
+          href="https://www.dextools.io/app/en/ether/pair-explorer/0x478e064f26833cac4f217ea044b5b170f56b2663?t=1716927654340"
+          target="_blank"
+          className="text-white "
+        >
+          <span className="sr-only">DexTools</span>
+          <img className="w-6 h-6" src="/dextools.png" />
+        </a>
         <a
           href="https://t.me/+6afNDnVhfjZiNzEx"
           target="_blank"

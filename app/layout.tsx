@@ -83,7 +83,18 @@ export default function RootLayout({
         </ContextProvider>
         <Analytics />
         <SpeedInsights />
-        <Toaster position="bottom-center" />
+        <Toaster
+          toastOptions={{
+            classNames: {
+              closeButton: "bg-black",
+            },
+            className:
+              "p-4 bg-black border-3 border-gold text-white rounded-xl",
+          }}
+          position="bottom-right"
+          closeButton
+          expand
+        />
       </body>
     </html>
   );

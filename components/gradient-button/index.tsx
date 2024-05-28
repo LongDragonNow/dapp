@@ -1,35 +1,12 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
-import { toast } from "sonner";
+import { Button, Link } from "@nextui-org/react";
 
 export const GradientButton = () => {
   return (
     <Button
-      onPress={() => {
-        toast.custom((t) => (
-          <div className="p-4 bg-black border-3 border-gold text-white flex flex-col justify-center items-center rounded-xl">
-            <div className="text-lg font-bold text-center">Coming soon!</div>
-            <div className="text-center">
-              <p>
-                The Long Dragon Dapp is currently under development and will be
-                available soon. Please check back later.
-              </p>
-            </div>
-            <Button
-              color="primary"
-              variant="ghost"
-              onPress={() => {
-                toast.dismiss(t);
-              }}
-              size="lg"
-              className="mt-4"
-            >
-              Close
-            </Button>
-          </div>
-        ));
-      }}
+      as={Link}
+      href="/dapp/staking"
       size="lg"
       className="mt-4 relative inline-flex overflow-hidden rounded-xl w-[200px] h-[60px] p-[1px]"
     >

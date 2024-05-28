@@ -14,7 +14,6 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import React from "react";
-import { toast } from "sonner";
 
 export default function LandingNavigationBar({
   className,
@@ -148,32 +147,8 @@ export default function LandingNavigationBar({
             size="md"
             color="primary"
             variant="ghost"
-            onPress={() => {
-              toast.custom((t) => (
-                <div className="p-4 bg-black border-3 border-gold text-white flex flex-col justify-center items-center rounded-xl">
-                  <div className="text-lg font-bold text-center">
-                    Coming soon!
-                  </div>
-                  <div className="text-center">
-                    <p>
-                      The Long Dragon Dapp is currently under development and
-                      will be available soon. Please check back later.
-                    </p>
-                  </div>
-                  <Button
-                    color="primary"
-                    variant="ghost"
-                    onPress={() => {
-                      toast.dismiss(t);
-                    }}
-                    size="lg"
-                    className="mt-4"
-                  >
-                    Close
-                  </Button>
-                </div>
-              ));
-            }}
+            as={Link}
+            href="/dapp/staking"
           >
             Enter Dapp
           </Button>

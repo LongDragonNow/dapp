@@ -93,7 +93,7 @@ export default function LandingNavigationBar({
             className="text-white"
             variant="light"
             as={Link}
-            href=""
+            href="https://t.me/LongDragonProtocol"
             target="_blank"
           >
             <svg
@@ -163,7 +163,7 @@ export default function LandingNavigationBar({
           </NavbarMenuItem>
         ))}
         <div className="flex justify-center mt-8 space-x-6">
-          <a href="" className="text-white ">
+          <a href="https://t.me/LongDragonProtocol" className="text-white ">
             <span className="sr-only">Telegram</span>
             <svg
               className="w-6 h-6"

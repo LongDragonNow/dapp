@@ -3,10 +3,6 @@
 import { cn } from "@/lib/utils";
 import {
   Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Image,
   Link,
   Navbar,
@@ -98,7 +94,7 @@ export default function LandingNavigationBar({
             className="text-white"
             variant="light"
             as={Link}
-            href="https://twitter.com/LongDragonLD"
+            href="https://t.me/longdragonai"
             target="_blank"
           >
             <svg
@@ -136,29 +132,16 @@ export default function LandingNavigationBar({
         </NavbarItem>
 
         <NavbarItem>
-          <Dropdown>
-            <DropdownTrigger>
-              <Button size="md" color="primary" variant="flat">
-                Litepaper
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Link Actions">
-              <DropdownItem
-                key="english"
-                href="/litepaper/English.pdf"
-                target="_blank"
-              >
-                English
-              </DropdownItem>
-              <DropdownItem
-                key="mandarin"
-                href="/litepaper/Mandarin.pdf"
-                target="_blank"
-              >
-                Mandarin
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <Button
+            as={Link}
+            href="https://long-4.gitbook.io/long-dragon"
+            target="_blank"
+            size="md"
+            color="primary"
+            variant="flat"
+          >
+            Gitbook
+          </Button>
         </NavbarItem>
         <NavbarItem className="md:hidden lg:block">
           <Button

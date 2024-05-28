@@ -21,11 +21,7 @@ export default function LandingFooter({ className }: { className?: string }) {
           <span className="sr-only">DexTools</span>
           <img className="w-6 h-6" src="/dextools.png" />
         </a>
-        <a
-          href="https://t.me/+6afNDnVhfjZiNzEx"
-          target="_blank"
-          className="text-white "
-        >
+        <a href="" target="_blank" className="text-white ">
           <span className="sr-only">Telegram</span>
           <svg
             className="w-6 h-6"

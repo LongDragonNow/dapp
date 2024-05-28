@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import {
+  Button,
   Image,
   Link,
   Navbar,
@@ -61,6 +62,28 @@ export default function NavigationBar({ className }: { className?: string }) {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
+        <NavbarItem>
+          <Button
+            color="primary"
+            variant="ghost"
+            onPress={() => {
+              (window as any).ethereum.request({
+                method: "wallet_watchAsset",
+                params: {
+                  type: "ERC20",
+                  options: {
+                    address: process.env.NEXT_PUBLIC_TOKEN_ADDRESS,
+                    symbol: "LD",
+                    decimals: 18,
+                    image: "https://longdragon.ai/ld_token.png",
+                  },
+                },
+              });
+            }}
+          >
+            Add $LD to Metamask
+          </Button>
+        </NavbarItem>
         <NavbarItem>
           <w3m-button />
         </NavbarItem>

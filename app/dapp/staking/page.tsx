@@ -21,7 +21,11 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { readContract, writeContract } from "@wagmi/core";
+import {
+  readContract,
+  waitForTransactionReceipt,
+  writeContract,
+} from "@wagmi/core";
 import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -130,11 +134,16 @@ function StakingPage() {
       if (BigInt(result) < BigInt(parseUnits(amount, 18))) {
         toast.loading("Please approve LD token spending cap.");
 
-        await writeContract(config, {
+        const hash = await writeContract(config, {
           abi: tokenAbi,
           address: tokenAddress,
           functionName: "approve",
           args: [stakingAddress, parseUnits(amount, 18)],
+        });
+
+        await waitForTransactionReceipt(config, {
+          confirmations: 3,
+          hash,
         });
       }
 
@@ -142,11 +151,16 @@ function StakingPage() {
 
       toast.loading("Please sign the transaction to stake.");
 
-      await writeContract(config, {
+      const hash = await writeContract(config, {
         abi: stakingAbi,
         address: stakingAddress,
         functionName: "stakeLd",
         args: [parseUnits(amount, 18)],
+      });
+
+      await waitForTransactionReceipt(config, {
+        confirmations: 3,
+        hash,
       });
 
       toast.dismiss();
@@ -169,11 +183,16 @@ function StakingPage() {
       setIsClaiming(true);
       toast.loading("Please sign the transaction to claim rewards.");
 
-      await writeContract(config, {
+      const hash = await writeContract(config, {
         abi: stakingAbi,
         address: stakingAddress,
         functionName: "claimRewards",
         args: [index],
+      });
+
+      await waitForTransactionReceipt(config, {
+        confirmations: 3,
+        hash,
       });
 
       toast.dismiss();
@@ -196,23 +215,34 @@ function StakingPage() {
       setIsUnstaking(true);
       toast.loading("Please claim rewards before unstaking.");
 
-      await writeContract(config, {
+      const hash = await writeContract(config, {
         abi: stakingAbi,
         address: stakingAddress,
         functionName: "claimRewards",
         args: [index],
       });
 
+      await waitForTransactionReceipt(config, {
+        confirmations: 3,
+        hash,
+      });
+
       toast.dismiss();
 
       toast.loading("Please sign the transaction to unstake.");
 
-      await writeContract(config, {
+      const unstakeHash = await writeContract(config, {
         abi: stakingAbi,
         address: stakingAddress,
         functionName: "unstakeLD",
         args: [amount, index],
       });
+
+      await waitForTransactionReceipt(config, {
+        confirmations: 3,
+        hash: unstakeHash,
+      });
+
       toast.dismiss();
 
       toast.success(
@@ -236,12 +266,18 @@ function StakingPage() {
       setIsRestaking(true);
       toast.loading("Please sign the transaction to restake.");
 
-      await writeContract(config, {
+      const hash = await writeContract(config, {
         abi: stakingAbi,
         address: stakingAddress,
         functionName: "reStake",
         args: [index],
       });
+
+      await waitForTransactionReceipt(config, {
+        confirmations: 3,
+        hash,
+      });
+
       toast.dismiss();
 
       toast.success("You have sucessfully restaked.");

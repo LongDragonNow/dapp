@@ -576,7 +576,7 @@ function StakingPage() {
                         >
                           {isRestaking ? "Confirming..." : "Restake"}
                         </Button>
-                        {/* <Button
+                        <Button
                           isLoading={isClaiming}
                           color="primary"
                           variant="flat"
@@ -590,7 +590,7 @@ function StakingPage() {
                           onClick={() => handleClaim(stake.index)}
                         >
                           {isClaiming ? "Confirming..." : "Claim Rewards"}
-                        </Button> */}
+                        </Button>
                         <Button
                           isLoading={isUnstaking}
                           color="danger"

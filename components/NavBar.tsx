@@ -21,7 +21,16 @@ export default function NavigationBar({ className }: { className?: string }) {
   const menuItems: {
     name: string;
     href: string;
-  }[] = [];
+  }[] = [
+    {
+      name: "Staking dApp",
+      href: "./staking",
+    },
+    {
+      name: "Sector dApp",
+      href: "./sector",
+    },
+  ];
 
   return (
     <Navbar
@@ -52,7 +61,7 @@ export default function NavigationBar({ className }: { className?: string }) {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify="start">
         {menuItems.map((item, index) => (
           <NavbarItem key={`${item}-${index}`}>
             <Link color="foreground" href={item.href}>
@@ -62,7 +71,7 @@ export default function NavigationBar({ className }: { className?: string }) {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="hidden sm:flex">
           <Button
             color="primary"
             variant="ghost"
@@ -88,7 +97,7 @@ export default function NavigationBar({ className }: { className?: string }) {
           <w3m-button />
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className="mt-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link

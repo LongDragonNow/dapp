@@ -213,21 +213,21 @@ function StakingPage() {
   const handleUnstake = async (amount: bigint, index: any) => {
     try {
       setIsUnstaking(true);
-      toast.loading("Please claim rewards before unstaking.");
+      // toast.loading("Please claim rewards before unstaking.");
 
-      const hash = await writeContract(config, {
-        abi: stakingAbi,
-        address: stakingAddress,
-        functionName: "claimRewards",
-        args: [index],
-      });
+      // const hash = await writeContract(config, {
+      //   abi: stakingAbi,
+      //   address: stakingAddress,
+      //   functionName: "claimRewards",
+      //   args: [index],
+      // });
 
-      await waitForTransactionReceipt(config, {
-        confirmations: 3,
-        hash,
-      });
+      // await waitForTransactionReceipt(config, {
+      //   confirmations: 3,
+      //   hash,
+      // });
 
-      toast.dismiss();
+      // toast.dismiss();
 
       toast.loading("Please sign the transaction to unstake.");
 
@@ -340,7 +340,7 @@ function StakingPage() {
       return `${daysUntilRewards} days until rewards available`;
     }
 
-    return formatUnits(rewards, 18);
+    return formatUnits(rewards / BigInt(10), 18);
   }
 
   const formattedTotalStaked = totalStaked
@@ -576,7 +576,7 @@ function StakingPage() {
                         >
                           {isRestaking ? "Confirming..." : "Restake"}
                         </Button>
-                        <Button
+                        {/* <Button
                           isLoading={isClaiming}
                           color="primary"
                           variant="flat"
@@ -590,7 +590,7 @@ function StakingPage() {
                           onClick={() => handleClaim(stake.index)}
                         >
                           {isClaiming ? "Confirming..." : "Claim Rewards"}
-                        </Button>
+                        </Button> */}
                         <Button
                           isLoading={isUnstaking}
                           color="danger"
